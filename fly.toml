@@ -1,4 +1,4 @@
-app = "tgforwardv3"
+app = "APtgforwardv3"
 primary_region = "sin"
 
 [build]
