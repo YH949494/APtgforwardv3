@@ -1,5 +1,8 @@
-app = "aptgforwardv3"   # <-- all lowercase, no underscore
-primary_region = "sin"
+app = "aptgforwardv3"
+primary_region = "syd"
+
+[build]
+  dockerfile = "Dockerfile"
 
 [env]
   PYTHONUNBUFFERED = "1"
@@ -7,4 +10,7 @@ primary_region = "sin"
 [processes]
   app = "python bot.py"
 
-# ❌ Do not include [build] if you already have Dockerfile
+[[vm]]
+  memory = "1gb"
+  cpu_kind = "shared"
+  cpus = 1
