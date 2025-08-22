@@ -1,9 +1,6 @@
 app = "aptgforwardv3"
 primary_region = "syd"
 
-[build]
-  dockerfile = "Dockerfile"
-
 [env]
   PYTHONUNBUFFERED = "1"
 
