@@ -31,4 +31,4 @@ if __name__ == "__main__":
     app = ApplicationBuilder().token(BOT_TOKEN).build()
     app.add_handler(MessageHandler(filters.ALL & filters.ChatType.CHANNEL, forward_message))
     app.run_polling()
- 
+  
