@@ -3,7 +3,7 @@ name: Fly.io Deploy
 on:
   push:
     branches:
-      - APtgforwardv3   # your branch
+      - flyio-new-files   # your branch
 
 jobs:
   deploy:
@@ -15,7 +15,7 @@ jobs:
       - name: Set up Flyctl
         uses: superfly/flyctl-actions@1.1
         with:
-          version: '1.5.0'   # install flyctl
+          version: '1.5.0'
 
       - name: Deploy to Fly.io
         env:
