@@ -1,4 +1,4 @@
-name: Fly.io Deploy
+name: Fly.io Deploy (Manual Flyctl Install)
 
 on:
   push:
@@ -10,12 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Install Flyctl
-        uses: superfly/flyctl-actions@1.1
-        with:
-          version: '1.5.0'
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
       - name: Deploy to Fly.io
         env:
@@ -24,7 +20,12 @@ jobs:
           TARGET_GROUP_ID: ${{ secrets.TARGET_GROUP_ID }}
           TARGET_TOPIC_ID: ${{ secrets.TARGET_TOPIC_ID }}
         run: |
-          echo "Deploying to Fly.io..."
-          which flyctl
+          echo "Installing Flyctl..."
+          curl -L https://fly.io/install.sh | sh
+          export PATH="$HOME/.fly/bin:$PATH"
+
+          echo "Flyctl version:"
           flyctl version
+
+          echo "Deploying to Fly.io..."
           flyctl deploy --remote-only --app aptgforwardv3
