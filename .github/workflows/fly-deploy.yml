@@ -3,7 +3,7 @@ name: Fly.io Deploy
 on:
   push:
     branches:
-      - flyio-new-files   # your branch name
+      - flyio-new-files
 
 jobs:
   deploy:
