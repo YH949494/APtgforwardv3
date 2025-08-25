@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Flyctl
+      - name: Install Flyctl
         uses: superfly/flyctl-actions@1.1
         with:
           version: '1.5.0'
@@ -25,4 +25,6 @@ jobs:
           TARGET_TOPIC_ID: ${{ secrets.TARGET_TOPIC_ID }}
         run: |
           echo "Deploying to Fly.io..."
+          which flyctl
+          flyctl version
           flyctl deploy --remote-only --app aptgforwardv3
