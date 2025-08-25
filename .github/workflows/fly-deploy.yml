@@ -3,7 +3,7 @@ name: Fly.io Deploy
 on:
   push:
     branches:
-      - flyio-new-files
+      - APtgforwardv3   # your branch
 
 jobs:
   deploy:
@@ -15,7 +15,7 @@ jobs:
       - name: Set up Flyctl
         uses: superfly/flyctl-actions@1.1
         with:
-          version: '1.5.0'
+          version: '1.5.0'   # install flyctl
 
       - name: Deploy to Fly.io
         env:
@@ -24,4 +24,5 @@ jobs:
           TARGET_GROUP_ID: ${{ secrets.TARGET_GROUP_ID }}
           TARGET_TOPIC_ID: ${{ secrets.TARGET_TOPIC_ID }}
         run: |
+          echo "Deploying to Fly.io..."
           flyctl deploy --remote-only --app aptgforwardv3
