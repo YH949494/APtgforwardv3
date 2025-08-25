@@ -1,6 +1,5 @@
 import os
 import logging
-import asyncio
 from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, ContextTypes, filters
 
@@ -29,17 +28,10 @@ async def forward_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             message_thread_id=TARGET_TOPIC_ID
         )
 
-# Main async loop with 5-minute polling
-async def main():
-    logging.info("🚀 Starting bot...")
-    app = ApplicationBuilder().token(BOT_TOKEN).build()
-    app.add_handler(MessageHandler(filters.ALL & filters.ChatType.CHANNEL, forward_message))
-
-    while True:
-        logging.info("Polling for new messages...")
-        await app.update_queue.start_polling()
-        logging.info("Sleeping for 5 minutes before next poll...")
-        await asyncio.sleep(300)  # 300 seconds = 5 minutes
-
 if __name__ == "__main__":
-    asyncio.run(main())
+    logging.info("🚀 Starting bot in real-time mode...")
+    app = ApplicationBuilder().token(BOT_TOKEN).build()
+    # Listen to all messages in channels
+    app.add_handler(MessageHandler(filters.ALL & filters.ChatType.CHANNEL, forward_message))
+    # Start real-time polling
+    app.run_polling()
