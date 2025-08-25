@@ -3,7 +3,7 @@ name: Fly.io Deploy
 on:
   push:
     branches:
-      - APtgforwardv3   # change to your branch
+      - flyio-new-files   # change to your branch
 
 jobs:
   deploy:
