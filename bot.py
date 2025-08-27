@@ -31,6 +31,17 @@ async def forward_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         except Exception as e:
             logging.error(f"❌ Failed to forward message: {e}")
 
+# /test command handler
+async def test_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    try:
+        await context.bot.send_message(
+            chat_id=TARGET_GROUP_ID,
+            text="🧪 Test forward message (triggered by /test)"
+        )
+        logging.info("✅ Test message sent")
+    except Exception as e:
+        logging.error(f"❌ Test message failed: {e}")
+        
 if __name__ == "__main__":
     logging.info("🚀 Starting bot in real-time mode...")
     app = ApplicationBuilder().token(BOT_TOKEN).build()
