@@ -24,5 +24,11 @@ async def forward_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         try:
             await context.bot.forward_message(
                 chat_id=TARGET_GROUP_ID,
-                from_chat_id=up
+                from_chat_id=update.channel_post.chat.id,
+                message_id=update.channel_post.message_id
+            )  # 👈 this parenthesis was missing
+            logging.info("✅ Forward success")
+        except Exception as e:
+            logging.error(f"❌ Failed to forward message: {e}")
+
  
