@@ -1,7 +1,7 @@
 import os
 import logging
 from telegram import Update
-from telegram.ext import ApplicationBuilder, MessageHandler, ContextTypes, filters
+from telegram.ext import ApplicationBuilder, MessageHandler, CommandHandler, ContextTypes, filters
 
 logging.basicConfig(level=logging.INFO)
 
@@ -26,7 +26,7 @@ async def forward_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 chat_id=TARGET_GROUP_ID,
                 from_chat_id=update.channel_post.chat.id,
                 message_id=update.channel_post.message_id
-            )  # 👈 this parenthesis was missing
+            )
             logging.info("✅ Forward success")
         except Exception as e:
             logging.error(f"❌ Failed to forward message: {e}")
@@ -41,13 +41,13 @@ async def test_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         logging.info("✅ Test message sent")
     except Exception as e:
         logging.error(f"❌ Test message failed: {e}")
-        
+
 if __name__ == "__main__":
     logging.info("🚀 Starting bot in real-time mode...")
     app = ApplicationBuilder().token(BOT_TOKEN).build()
-    # Only listen to channel posts
+
+    # Handlers
     app.add_handler(MessageHandler(filters.ALL & filters.ChatType.CHANNEL, forward_message))
-    app.run_polling()  # 👈 keeps the bot alive
+    app.add_handler(CommandHandler("test", test_command))  # 👈 register /test
 
-
- 
+    app.run_polling()
