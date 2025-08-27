@@ -31,4 +31,12 @@ async def forward_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         except Exception as e:
             logging.error(f"❌ Failed to forward message: {e}")
 
+if __name__ == "__main__":
+    logging.info("🚀 Starting bot in real-time mode...")
+    app = ApplicationBuilder().token(BOT_TOKEN).build()
+    # Only listen to channel posts
+    app.add_handler(MessageHandler(filters.ALL & filters.ChatType.CHANNEL, forward_message))
+    app.run_polling()  # 👈 keeps the bot alive
+
+
  
