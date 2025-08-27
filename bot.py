@@ -25,3 +25,4 @@ async def forward_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await context.bot.forward_message(
                 chat_id=TARGET_GROUP_ID,
                 from_chat_id=up
+ 
