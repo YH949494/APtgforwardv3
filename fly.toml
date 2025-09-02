@@ -13,5 +13,5 @@ primary_region = "sin"
   cpus = 1
 
 [scale]
-  min_machines_running = 1
-  max_machines_running = 1
+  min_machines_running = 2
+  max_machines_running = 2
