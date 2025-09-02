@@ -1,7 +1,11 @@
 import os
 import logging
+
+# ✅ Force httpx (used by python-telegram-bot) to use IPv4 only
+os.environ["HTTPX_LOCAL_ADDRESS"] = "0.0.0.0"
+
 from telegram import Update
-from telegram.ext import ApplicationBuilder, MessageHandler, CommandHandler, ContextTypes, filters 
+from telegram.ext import ApplicationBuilder, MessageHandler, ContextTypes, filters
 
 logging.basicConfig(level=logging.INFO)
 
@@ -32,7 +36,7 @@ async def forward_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             logging.error(f"❌ Failed to forward message: {e}")
 
 if __name__ == "__main__":
-    logging.info("🚀 Starting bot in real-time mode...")
+    logging.info("🚀 Starting bot in real-time mode (IPv4 only)...")
     app = ApplicationBuilder().token(BOT_TOKEN).build()
 
     # Handlers
