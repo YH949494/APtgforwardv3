@@ -21,25 +21,25 @@ if not BOT_TOKEN or not TARGET_GROUP_ID or not SOURCE_CHANNEL_ID:
 TARGET_GROUP_ID = int(TARGET_GROUP_ID)
 SOURCE_CHANNEL_ID = int(SOURCE_CHANNEL_ID)
 
-# Forwarding function
-async def forward_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+# ✅ Copying function instead of forwarding
+async def copy_message_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.channel_post and update.channel_post.chat.id == SOURCE_CHANNEL_ID:
-        logging.info(f"📩 Forwarding message {update.channel_post.message_id} from channel {SOURCE_CHANNEL_ID}")
+        logging.info(f"📩 Copying message {update.channel_post.message_id} from channel {SOURCE_CHANNEL_ID}")
         try:
-            await context.bot.forward_message(
+            await context.bot.copy_message(
                 chat_id=TARGET_GROUP_ID,
                 from_chat_id=update.channel_post.chat.id,
                 message_id=update.channel_post.message_id
             )
-            logging.info("✅ Forward success")
+            logging.info("✅ Copy success")
         except Exception as e:
-            logging.error(f"❌ Failed to forward message: {e}")
+            logging.error(f"❌ Failed to copy message: {e}")
 
 if __name__ == "__main__":
     logging.info("🚀 Starting bot in real-time mode (IPv4 only)...")
     app = ApplicationBuilder().token(BOT_TOKEN).build()
 
     # Handlers
-    app.add_handler(MessageHandler(filters.ALL & filters.ChatType.CHANNEL, forward_message))
+    app.add_handler(MessageHandler(filters.ALL & filters.ChatType.CHANNEL, copy_message_handler))
 
     app.run_polling()
