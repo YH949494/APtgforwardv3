@@ -5,7 +5,7 @@ import logging
 os.environ["HTTPX_LOCAL_ADDRESS"] = "0.0.0.0"
 
 from telegram import Update
-from telegram.ext import ApplicationBuilder, MessageHandler, ContextTypes, filters
+from telegram.ext import ApplicationBuilder, MessageHandler, ContextTypes, filters 
 
 logging.basicConfig(level=logging.INFO)
 
