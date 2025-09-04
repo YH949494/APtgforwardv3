@@ -10,7 +10,7 @@ from telegram.ext import ApplicationBuilder, MessageHandler, ContextTypes, filte
 logging.basicConfig(level=logging.INFO)
 
 # Load environment variables
-BOT_TOKEN = os.getenv("BOT_TOKEN")
+BOT_TOKEN = os.getenv("BOT_TOKEN") 
 TARGET_GROUP_ID = os.getenv("TARGET_GROUP_ID")
 SOURCE_CHANNEL_ID = os.getenv("SOURCE_CHANNEL_ID")
 FLY_APP_NAME = os.getenv("FLY_APP_NAME")  # 👈 Fly app name for webhook URL
