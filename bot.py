@@ -6,6 +6,8 @@ os.environ["HTTPX_LOCAL_ADDRESS"] = "0.0.0.0"
 
 from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, ContextTypes, filters 
+from telegram import Bot
+import asyncio
 
 logging.basicConfig(level=logging.INFO)
 
@@ -37,6 +39,12 @@ async def copy_message_handler(update: Update, context: ContextTypes.DEFAULT_TYP
         except Exception as e:
             logging.error(f"❌ Failed to copy message: {e}")
 
+async def set_webhook():
+    bot = Bot(BOT_TOKEN)
+    await bot.delete_webhook()  # clear any old one
+    await bot.set_webhook(WEBHOOK_URL)
+    logging.info(f"✅ Webhook set to {WEBHOOK_URL}")
+    
 if __name__ == "__main__":
     logging.info("🚀 Starting bot in webhook mode...")
 
@@ -48,10 +56,17 @@ if __name__ == "__main__":
     # Webhook URL (must be HTTPS + unique for your bot)
     WEBHOOK_URL = f"https://{FLY_APP_NAME}.fly.dev/webhook"
 
-    # Start webhook
+    async def set_webhook():
+        bot = Bot(BOT_TOKEN)
+        await bot.set_webhook(WEBHOOK_URL)
+        logging.info(f"✅ Webhook set to {WEBHOOK_URL}")
+
+    asyncio.get_event_loop().run_until_complete(set_webhook())
+
+    # Start webhook server
     app.run_webhook(
         listen="0.0.0.0",
         port=PORT,
         webhook_url=WEBHOOK_URL,
-        secret_token=None,  # optional: set if you want extra security
+        secret_token=None,  # optional
     )
