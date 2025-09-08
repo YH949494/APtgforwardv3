@@ -16,24 +16,14 @@ primary_region = "sin"
   min_machines_running = 2
   max_machines_running = 2
 
-# -----------------------------
-# Add this to handle HTTP traffic
-# -----------------------------
+# <-- Add this
 [[services]]
   internal_port = 8080
   protocol = "tcp"
-
-  [[services.ports]]
-    port = 443
-    handlers = ["http"]
-
+  processes = ["app"]  # link to your 'app' process
   [[services.ports]]
     port = 80
     handlers = ["http"]
-
-  # Optional health checks
-  [[services.http_checks]]
-    interval = 10000
-    timeout = 2000
-    method = "GET"
-    path = "/"
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
