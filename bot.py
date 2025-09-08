@@ -8,7 +8,7 @@ from telegram.ext import ApplicationBuilder, MessageHandler, CommandHandler, Con
 os.environ["HTTPX_LOCAL_ADDRESS"] = "0.0.0.0"
 
 logging.basicConfig(level=logging.INFO)
-
+ 
 # Load environment variables
 BOT_TOKEN = os.getenv("BOT_TOKEN") 
 TARGET_GROUP_ID = os.getenv("TARGET_GROUP_ID")
