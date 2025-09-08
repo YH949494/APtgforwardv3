@@ -45,9 +45,11 @@ if __name__ == "__main__":
     app.add_handler(CommandHandler("ping", ping_command))
     app.add_handler(MessageHandler(filters.ALL, debug_handler))
 
-    app.run_webhook(
-        listen="0.0.0.0",
-        port=PORT,
-        url_path="webhook",
-        webhook_url=f"https://{FLY_APP_NAME}.fly.dev/webhook",  # <-- Telegram will send here
-    )
+   app.run_webhook(
+    listen="0.0.0.0",
+    port=PORT,
+    url_path="webhook",
+    webhook_url=f"https://{FLY_APP_NAME}.fly.dev/webhook",
+    drop_pending_updates=True,   # 👈 important
+)
+
