@@ -19,7 +19,8 @@ logging.basicConfig(level=logging.INFO)
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 TARGET_GROUP_ID = int(os.getenv("TARGET_GROUP_ID"))
 SOURCE_CHANNEL_ID = int(os.getenv("SOURCE_CHANNEL_ID"))
-SOURCE_GROUP_ID = int(os.getenv("SOURCE_GROUP_ID"))  # <--- add if supergroup source
+source_group_id_env = os.getenv("SOURCE_GROUP_ID")
+SOURCE_GROUP_ID = int(source_group_id_env) if source_group_id_env else None
 FLY_APP_NAME = os.getenv("FLY_APP_NAME")
 PORT = int(os.getenv("PORT", 8080))
 
