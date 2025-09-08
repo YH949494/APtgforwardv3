@@ -11,7 +11,7 @@ from telegram.ext import (
 import asyncio
 
 # Force httpx to IPv4
-os.environ["HTTPX_LOCAL_ADDRESS"] = "0.0.0.0"
+os.environ["HTTPX_LOCAL_ADDRESS"] = "0.0.0.0" 
 
 logging.basicConfig(level=logging.INFO)
 
