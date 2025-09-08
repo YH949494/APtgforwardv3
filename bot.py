@@ -70,7 +70,7 @@ if __name__ == "__main__":
     app.run_webhook(
     listen="0.0.0.0",
     port=PORT,
-    url_path="",  # root path
-    webhook_url=f"https://{FLY_APP_NAME}.fly.dev",  # no /webhook suffix
+    url_path="webhook",  # 👈 bot listens at /webhook
+    webhook_url=f"https://{FLY_APP_NAME}.fly.dev/webhook",  # 👈 match with Telegram
 )
 
