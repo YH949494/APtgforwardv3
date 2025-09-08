@@ -68,7 +68,9 @@ if __name__ == "__main__":
 
     # Start webhook server
     app.run_webhook(
-        listen="0.0.0.0",
-        port=PORT,
-        webhook_url=WEBHOOK_URL,
-    )
+    listen="0.0.0.0",
+    port=PORT,
+    url_path="",  # root path
+    webhook_url=f"https://{FLY_APP_NAME}.fly.dev",  # no /webhook suffix
+)
+
